@@ -1,2 +1,4 @@
 #Colours
-PASTEL_PINK = (255,209,220)
+WHITE              = (255,255,255)
+PASTEL_PINK        = (255,209,220)
+
