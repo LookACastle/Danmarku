@@ -2,7 +2,8 @@ import pygame, sys
 from constants import *
 
 pygame.init()
-WINDOW = pygame.display.set_mode((1280,720))
+MONITOR_INFO = pygame.display.Info()
+WINDOW = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
 #Input handling
 def keyboard(event):
@@ -11,6 +12,8 @@ def keyboard(event):
 		WINDOW.fill(WHITE)
 	if event.key == pygame.K_p: #test
 		WINDOW.fill(PASTEL_PINK)
+	if event.key == pygame.K_x: #test
+		pygame.draw.circle(WINDOW,PASTEL_PINK,(int(MONITOR_INFO.current_w/2), int(MONITOR_INFO.current_h/2)), 100, 9)
 	if event.key == pygame.K_ESCAPE:
 		pygame.quit()
 		sys.exit()
