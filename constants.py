@@ -1,37 +1,46 @@
 #Colours
 WHITE               = (255,255,255)
 PASTEL_PINK         = (255,209,220)
+SPRITES = [["ROBOT", "ROBOT_ANIM_1", "ROBOT_ANIM_2", "ROBOT_ANIM_3", "EXPLOSION_ANIM_1", "EXPLOSION_ANIM_2", 
+"EXPLOSION_ANIM_3", "EXPLOSION_ANIM_4", "EXPLOSION_ANIM_5", "EXPLOSION_ANIM_6", "EXPLOSION_ANIM_7", 
+"BLUE_LASER", "BLUE_CIRCLE", "BLUE_MOON", "RED_LASER", "RED_CIRCLE", "RED_MOON", "GREEN_LASER", "GREEN_CIRCLE", 
+"GREEN_MOON", "PURPLE_LASER", "PURPLE_CIRCLE", "PIRPLE_MOON", "GOLD_RING", "METAL_RING", "GOLD_STAR", "METAL_STAR"], 
+["ON_PLANE", "ON_PLANE_SHOOT_ANIMATION_1", "ON_PLANE_SHOOT_ANIMATION_2", "ON_PLANE_SHOOT_ANIMATION_3", 
+"ON_PLANE_SHOOT_ANIMATION_4", "PLAYER_HITBOX", "PLAYER_PROJECTILE"], 
+["IDLE_PLAYER", "IDLE_ANIMATION_1", "IDLE_ANIMATION_2", "IDLE_ANIMATION_3", "IDLE_LOOK_ANIMATION_1", 
+"IDLE_LOOK_ANIMATION_2", "IDLE_LOOK_ANIMATION_3", "IDLE_LOOK_ANIMATION_4", "IDLE_LOOK_ANIMATION_5", 
+"IDLE_LOOK_ANIMATION_6", "IDLE_LOOK_ANIMATION_7", "IDLE_LOOK_ANIMATION_8"]]
 
-SCALE               = 4
-
-SPRITESHEETS = ["Enemies_128_128.png", "Player_128_128.png", "PlayerMainScreen_64_64.png"]
+ENEMYSPRITESARRAY = 0
+PLAYERSPRITESARRAY = 1
+PLAYERMAINSCREENSPRITESARRAY = 2
 
 #Enemies Sprite Numbers
-ROBOT               = '00'
-EXPLOSION           = '04'
-BLUE_LASER          = '11'
-BLUE_CIRCLE         = '12'
-BLUE_MOON           = '13'
-RED_LASER           = '14'
-RED_CIRCLE          = '15'
-RED_MOON            = '16'
-GREEN_LASER         = '17'
-GREEN_CIRCLE        = '18'
-GREEN_MOON          = '19'
-PURPLE_LASER        = '20'
-PURPLE_CIRCLE       = '21'
-PURPLE_MOON         = '22'
-GOLD_RING           = '23'
-METAL_RING          = '24'
-GOLD_STAR           = '25'
-METAL_STAR          = '26'
+ROBOT               = 0
+EXPLOSION           = 4
+BLUE_LASER          = 11
+BLUE_CIRCLE         = 12
+BLUE_MOON           = 13
+RED_LASER           = 14
+RED_CIRCLE          = 15
+RED_MOON            = 16
+GREEN_LASER         = 17
+GREEN_CIRCLE        = 18
+GREEN_MOON          = 19
+PURPLE_LASER        = 20
+PURPLE_CIRCLE       = 21
+PURPLE_MOON         = 22
+GOLD_RING           = 23
+METAL_RING          = 24
+GOLD_STAR           = 25
+METAL_STAR          = 26
 
 #Player Plane Sprite Numbers
-ON_PLANE            = '00'
-ON_PLANE_SHOOT      = '01'
-PLAYER_HITBOT       = '05'
-PLANE               = '06'
+ON_PLANE            = 0
+ON_PLANE_SHOOT      = 1
+PLAYER_HITBOT       = 5
+PLANE               = 6
 
 #Player Main Screen Sprite Numbers
-IDLE                = '00'
-LOOK                = '04'
+IDLE                = 0
+LOOK                = 4

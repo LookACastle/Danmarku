@@ -4,13 +4,14 @@ from constants import *
 
 class Sprites(pygame.sprite.Sprite):
 
-    def __init__(self, x, y, path, sprite):
+    def __init__(self, x, y, array, imageType, image):
         self.x = x
         self.y = y
-        self.sprite = sprite
-        self.image = pygame.image.load("sprites/" + path + "/" + sprite + ".png").convert_alpha()
-        self.spriteheight = self.image.get_height()
-        self.spritewidth = self.image.get_width()
-        
-    def render(self, window):
-        window.blit(self.image, (self.x - self.spriteheight/2, self.y - self.spritewidth/2))
+        self.imageType = imageType
+        self.image = image
+        self.object = array[self.imageType][self.image]
+        self.spriteheight = self.object.get_height()
+        self.spritewidth = self.object.get_width()
+            
+    def render_Sprites(self, window):
+        window.blit(self.object, (self.x - self.spriteheight/2, self.y - self.spritewidth/2))
