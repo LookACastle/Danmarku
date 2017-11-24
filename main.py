@@ -18,12 +18,14 @@ test2 = None
 def keyboard(event):
 	global WINDOW
 	pressed = pygame.key.get_pressed()
+	global test, test2
 	if pressed[pygame.K_w]: #test
 		WINDOW.fill(WHITE)
 	if pressed[pygame.K_p]: #test
 		WINDOW.fill(PASTEL_PINK)
 	if pressed[pygame.K_x]: #test
-		global test, test2
+		test.move(2, 2, WINDOW)
+		test2.move(-2, -2, WINDOW)
 		test = Sprites(int(MONITOR_INFO.current_w/2), int(MONITOR_INFO.current_h/2), loaded_Sprites, PLAYERSPRITESARRAY, ON_PLANE)
 		test.render_Sprites(WINDOW)
 		test2 = Sprites(int(MONITOR_INFO.current_w/2) + 130, int(MONITOR_INFO.current_h/2) + 130, loaded_Sprites, ENEMYSPRITESARRAY, PURPLE_CIRCLE)
