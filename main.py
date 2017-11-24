@@ -6,6 +6,7 @@ from gfx.loadAllSprites import load_Sprites
 pygame.init()
 MONITOR_INFO = pygame.display.Info()
 WINDOW = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+keyboard_event = False
 
 loaded_Sprites = [[], [], []]
 
@@ -38,8 +39,14 @@ def keyboard(event):
 
 
 while True:
+	if pygame.KEYDOWN:
+		keyboard_event = True
+	elif pygame.KEYDOWN:
+		keyboard_event = False
+		
+
 	for event in pygame.event.get():
-		if event.type == pygame.KEYDOWN:
+		if keyboard_event:
 			keyboard(event)
 	
 	if test is not None and test2 is not None:
