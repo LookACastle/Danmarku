@@ -41,7 +41,7 @@ def keyboard(event):
 while True:
 	if pygame.KEYDOWN:
 		keyboard_event = True
-	elif pygame.KEYDOWN:
+	elif pygame.KEYUP:
 		keyboard_event = False
 		
 
