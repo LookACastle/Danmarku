@@ -50,5 +50,5 @@ class Player(pygame.sprite.Sprite):
         
 
 
-    def render_player(self):
-        self.window.blit(self.player, (self.x - 64, self.y - 64))
+    def render(self, window):
+        window.blit(self.player, (self.x - 64, self.y - 64))

@@ -17,7 +17,7 @@ class Sprites(pygame.sprite.Sprite):
         self.rect = pygame.Rect(self.x, self.y, self.spritewidth, self.spriteheight)
         self.mask = pygame.mask.from_surface(self.object)
 		
-    def render_Sprites(self, window):
+    def render(self, window):
         window.blit(self.object, (self.x - self.spriteheight/2, self.y - self.spritewidth/2))
 
     def move(self, vx, vy, window):
