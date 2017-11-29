@@ -26,6 +26,10 @@ render_objects.append(player)
 #Input handling
 def keyboard(event):
 	pressed = pygame.key.get_pressed()
+	if pressed[pygame.K_b]:
+		playerpos = player.getPos()
+		StartBulletFan(980, 0, 50, 160, 0,loaded_Sprites, 14, 0.000001, WINDOW, renderBullets)
+		#StartStraight(980, 540, True, playerpos[0], playerpos[1], loaded_Sprites, 14, 6, WINDOW, renderBullets)
 	if pressed[pygame.K_ESCAPE]:
 		pygame.quit()
 		sys.exit()
