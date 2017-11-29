@@ -12,6 +12,7 @@ WINDOW = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
 loaded_Sprites = [[], [], []]
 render_objects = []
 load_Sprites(loaded_Sprites)
+clock = pygame.time.Clock()
 MONITOR_INFO = pygame.display.Info()
 
 test = Player(int(MONITOR_INFO.current_w/2), int(MONITOR_INFO.current_h/2), loaded_Sprites, WINDOW)
@@ -36,6 +37,7 @@ def keyboard(event):
 start_time = time.time()
 framecount = 0
 while True:
+	clock.tick(MAX_FPS)
 	framecount+=1 
 	if (time.time()-start_time >= 1):
 		print("FPS:"+ str(math.floor(framecount/(time.time()-start_time))))
