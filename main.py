@@ -4,7 +4,7 @@ from gfx.loadSprite import Sprites
 from gfx.loadAllSprites import load_Sprites
 from entities.player import Player
 from gfx.render import *
-
+from bullets import *
 
 pygame.init()
 global test, test2, WINDOW
@@ -15,6 +15,7 @@ else:
 	WINDOW = pygame.display.set_mode((MONITOR_INFO.current_w, MONITOR_INFO.current_h), pygame.FULLSCREEN)
 loaded_Sprites = [[], [], []]
 render_objects = []
+renderBullets = []
 load_Sprites(loaded_Sprites)
 clock = pygame.time.Clock()
 window_w, window_h = pygame.display.get_surface().get_size()
@@ -25,6 +26,8 @@ test3 = Sprites(int(window_w/2), int(window_h/2), loaded_Sprites, ENEMYSPRITESAR
 render_objects.append(test)
 render_objects.append(test2)
 render_objects.append(test3)
+
+StartBulletShower(0,30,50,15, WINDOW, loaded_Sprites, renderBullets)
 
 #Input handling
 def keyboard(event):
@@ -56,3 +59,6 @@ while True:
 		else:
 			print("no collision :(")'''
 	pygame.display.update(render_objects)
+	for i in range(len(renderBullets)):
+		renderBullets[i].move(window_w, window_h)
+	pygame.display.update(renderBullets)
