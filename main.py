@@ -5,15 +5,14 @@ from gfx.loadAllSprites import load_Sprites
 from entities.player import Player
 from gfx.render import *
 
-global test, test2, WINDOW
-pygame.init()
-MONITOR_INFO = pygame.display.Info()
-WINDOW = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
+pygame.init()
+global test, test2, WINDOW
+WINDOW = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
 loaded_Sprites = [[], [], []]
 render_objects = []
-
 load_Sprites(loaded_Sprites)
+MONITOR_INFO = pygame.display.Info()
 
 test = Player(int(MONITOR_INFO.current_w/2), int(MONITOR_INFO.current_h/2), loaded_Sprites, WINDOW)
 test2 = Sprites(int(MONITOR_INFO.current_w/2) + 130, int(MONITOR_INFO.current_h/2) + 130, loaded_Sprites, ENEMYSPRITESARRAY, PURPLE_CIRCLE)
