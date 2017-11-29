@@ -5,6 +5,7 @@ from gfx.loadAllSprites import load_Sprites
 from entities.player import Player
 from gfx.render import *
 
+global test, test2, WINDOW
 pygame.init()
 MONITOR_INFO = pygame.display.Info()
 WINDOW = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
@@ -23,17 +24,9 @@ render_objects.append(test3)
 
 #Input handling
 def keyboard(event):
-	global WINDOW
 	pressed = pygame.key.get_pressed()
-	global test, test2
-	if pressed[pygame.K_q]: #test
-		WINDOW.fill(WHITE)
 	if pressed[pygame.K_p]: #test
-		WINDOW.fill(PASTEL_PINK)
-		test2.move(-2, -2, WINDOW)
-	#if pressed[pygame.K_x]: #test
-	#if pressed[pygame.K_z]:
-		
+		test2.move(-2, -2, WINDOW)	
 	if pressed[pygame.K_ESCAPE]:
 		pygame.quit()
 		sys.exit()
