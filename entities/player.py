@@ -35,3 +35,6 @@ class Player(pygame.sprite.Sprite):
     
     def render(self, window):
         window.blit(self.player, (self.x - 64, self.y - 64))
+
+    def getPos(self):
+        return [self.x, self.y]
