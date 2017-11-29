@@ -27,8 +27,6 @@ render_objects.append(test)
 render_objects.append(test2)
 render_objects.append(test3)
 
-StartBulletShower(0,30,50,15, WINDOW, loaded_Sprites, renderBullets)
-
 #Input handling
 def keyboard(event):
 	pressed = pygame.key.get_pressed()
@@ -47,18 +45,18 @@ while True:
 	clock.tick(MAX_FPS)
 	framecount+=1 
 	if (time.time()-start_time >= 1):
+		StartBulletShower(64,19,100,16, WINDOW, loaded_Sprites, renderBullets, render_objects)
 		print("FPS:"+ str(math.floor(framecount/(time.time()-start_time))))
 		framecount = 0
 		start_time = time.time()
 	keyboard(pygame.event.get(pygame.KEYDOWN))
 	test.movement(pygame.event.get(pygame.KEYDOWN), window_w, window_h)
-	render(render_objects, WINDOW)
 	'''if test is not None and test2 is not None:
 		if pygame.sprite.collide_mask(test, test2):
 			print("COLLISION")
 		else:
 			print("no collision :(")'''
-	pygame.display.update(render_objects)
 	for i in range(len(renderBullets)):
 		renderBullets[i].move(window_w, window_h)
-	pygame.display.update(renderBullets)
+	render(render_objects, WINDOW)
+	pygame.display.update(render_objects)
