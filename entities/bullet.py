@@ -26,3 +26,6 @@ class bullet(pygame.sprite.Sprite):
 
 	def render(self, window):
 		window.blit(self.bullet, (self.x - 64, self.y - 64))
+
+	def rotate(self, angle):
+		pygame.transform.rotate(self.bullet, angle)
