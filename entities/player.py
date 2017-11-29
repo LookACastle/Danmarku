@@ -12,24 +12,25 @@ class Player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.rect = pygame.Rect(self.x-65, self.y-65, 130, 130)
         self.mask = pygame.mask.from_surface(self.player)
-
+        self.speed = 5
+		
     def movement(self, event, width, height):
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_w]:
             if (self.y >= 64):
-                self.y -= 1
+                self.y -= self.speed
                 self.rect = pygame.Rect(self.x-65, self.y-65, 130, 130)
         if pressed[pygame.K_s]:
             if (self.y <= height - 64):
-                self.y += 1
+                self.y += self.speed
                 self.rect = pygame.Rect(self.x-65, self.y-65, 130, 130)
         if pressed[pygame.K_a]:
             if (self.x >= 64):
-                self.x -= 1
+                self.x -= self.speed
                 self.rect = pygame.Rect(self.x-65, self.y-65, 130, 130)
         if pressed[pygame.K_d]:
             if (self.x <= width - 64):
-                self.x += 1
+                self.x += self.speed
                 self.rect = pygame.Rect(self.x-65, self.y-65, 130, 130)
     
     def render(self, window):

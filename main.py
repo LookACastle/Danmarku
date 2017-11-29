@@ -9,7 +9,7 @@ from gfx.render import *
 pygame.init()
 global test, test2, WINDOW
 MONITOR_INFO = pygame.display.Info()
-if MONITOR_INFO.current_w > 1080 and MONITOR_INFO.current_h > 1920:
+if MONITOR_INFO.current_h >= 1080 and MONITOR_INFO.current_w >= 1920:
 	WINDOW = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
 else:
 	WINDOW = pygame.display.set_mode((MONITOR_INFO.current_w, MONITOR_INFO.current_h), pygame.FULLSCREEN)
@@ -17,10 +17,11 @@ loaded_Sprites = [[], [], []]
 render_objects = []
 load_Sprites(loaded_Sprites)
 clock = pygame.time.Clock()
+window_w, window_h = pygame.display.get_surface().get_size()
 
-test = Player(int(MONITOR_INFO.current_w/2), int(MONITOR_INFO.current_h/2), loaded_Sprites, WINDOW)
-test2 = Sprites(int(MONITOR_INFO.current_w/2) + 130, int(MONITOR_INFO.current_h/2) + 130, loaded_Sprites, ENEMYSPRITESARRAY, PURPLE_CIRCLE)
-test3 = Sprites(int(MONITOR_INFO.current_w/2), int(MONITOR_INFO.current_h/2), loaded_Sprites, ENEMYSPRITESARRAY, PURPLE_CIRCLE)
+test = Player(int(window_w/2), int(window_h/2), loaded_Sprites, WINDOW)
+test2 = Sprites(int(window_w/2) + 130, int(window_h/2) + 130, loaded_Sprites, ENEMYSPRITESARRAY, PURPLE_CIRCLE)
+test3 = Sprites(int(window_w/2), int(window_h/2), loaded_Sprites, ENEMYSPRITESARRAY, PURPLE_CIRCLE)
 render_objects.append(test)
 render_objects.append(test2)
 render_objects.append(test3)
@@ -47,7 +48,7 @@ while True:
 		framecount = 0
 		start_time = time.time()
 	keyboard(pygame.event.get(pygame.KEYDOWN))
-	test.movement(pygame.event.get(pygame.KEYDOWN), MONITOR_INFO.current_w, MONITOR_INFO.current_h)
+	test.movement(pygame.event.get(pygame.KEYDOWN), window_w, window_h)
 	render(render_objects, WINDOW)
 	'''if test is not None and test2 is not None:
 		if pygame.sprite.collide_mask(test, test2):
