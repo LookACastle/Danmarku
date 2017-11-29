@@ -21,5 +21,8 @@ class bullet(pygame.sprite.Sprite):
 			self.x += self.vx
 			self.rect = pygame.Rect(self.x - (64 + self.vx), self.y - (64 + self.vy), 128 + self.vx*2, 128 + self.vy*2)
 
+	def getpos(self):
+		return [self.x, self.y]
+
 	def render(self, window):
 		window.blit(self.bullet, (self.x - 64, self.y - 64))
