@@ -50,4 +50,4 @@ while True:
 			print("COLLISION")
 		else:
 			print("no collision :(")'''
-	pygame.display.update()
+	pygame.display.update(render_objects)

@@ -5,5 +5,5 @@ def load_Sprites(loaded_Sprites):
     folders = ["Enemies", "Player", "PlayerMainScreen"]
     for x in range(len(SPRITES)):
         for y in range(len(SPRITES[x])):
-            sprite = pygame.image.load("sprites/" + folders[x] + "/" + str(y) + ".png")
+            sprite = pygame.image.load("sprites/" + folders[x] + "/" + str(y) + ".png").convert_alpha()
             loaded_Sprites[x].append(sprite)
