@@ -8,12 +8,15 @@ from gfx.render import *
 
 pygame.init()
 global test, test2, WINDOW
-WINDOW = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
+MONITOR_INFO = pygame.display.Info()
+if MONITOR_INFO.current_w > 1080 and MONITOR_INFO.current_h > 1920:
+	WINDOW = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
+else:
+	WINDOW = pygame.display.set_mode((MONITOR_INFO.current_w, MONITOR_INFO.current_h), pygame.FULLSCREEN)
 loaded_Sprites = [[], [], []]
 render_objects = []
 load_Sprites(loaded_Sprites)
 clock = pygame.time.Clock()
-MONITOR_INFO = pygame.display.Info()
 
 test = Player(int(MONITOR_INFO.current_w/2), int(MONITOR_INFO.current_h/2), loaded_Sprites, WINDOW)
 test2 = Sprites(int(MONITOR_INFO.current_w/2) + 130, int(MONITOR_INFO.current_h/2) + 130, loaded_Sprites, ENEMYSPRITESARRAY, PURPLE_CIRCLE)
