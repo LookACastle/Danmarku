@@ -20,9 +20,6 @@ load_Sprites(loaded_Sprites)
 clock = pygame.time.Clock()
 window_w, window_h = pygame.display.get_surface().get_size()
 
-
-StartBulletShower(64,19,100,16, WINDOW, loaded_Sprites, renderBullets)
-
 test = Player(int(window_w/2), int(window_h/2), loaded_Sprites, WINDOW)
 test2 = Sprites(int(window_w/2) + 130, int(window_h/2) + 130, loaded_Sprites, ENEMYSPRITESARRAY, PURPLE_CIRCLE)
 test3 = Sprites(int(window_w/2), int(window_h/2), loaded_Sprites, ENEMYSPRITESARRAY, PURPLE_CIRCLE)
@@ -48,6 +45,8 @@ while True:
 	clock.tick(MAX_FPS)
 	framecount+=1 
 	if (time.time()-start_time >= 1):
+		StartBulletShower(64,19,100,16, WINDOW, loaded_Sprites, renderBullets)
+		print(len(renderBullets))
 		print("FPS:"+ str(math.floor(framecount/(time.time()-start_time))))
 		framecount = 0
 		start_time = time.time()
@@ -58,18 +57,12 @@ while True:
 			print("COLLISION")
 		else:
 			print("no collision :(")'''
-	
-	pop = 0
-	i = 0
-	while (i < len(renderBullets) - pop):
-		renderBullets[i].move(window_w, window_h)
+	WINDOW.fill((66, 194, 244))
+	for i in range((len(renderBullets)-1),-1,-1):
 		renderBullets[i].render(WINDOW)
-		pos = renderBullets[i].getpos()
-		if (pos[1] < -128 or pos[1] > window_h + 128 or pos[0] < 0 - 128 or pos[0] > window_w + 128):
+		remove = renderBullets[i].move(window_w, window_h)
+		if (remove):
 			renderBullets.pop(i)
-			i = i - 1
-			pop += 1
-		i += 1
 	render(render_objects, WINDOW)
 	pygame.display.update(render_objects)
 	pygame.display.update(renderBullets)
