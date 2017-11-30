@@ -34,15 +34,14 @@ def BulletFan(x, y, amount, spread, delay, array, sprite, speed, Window, render)
 
 def Straight(x, y, Tracer, px, py, sprite, array, speed, Window, render):
 	if Tracer:
-		t = (((x**2-px**2)+(y**2-py**2))**(0.5))/speed
+		t = (((x-px)**2+(y-py)**2)**(0.5))/speed
 		vx = abs((px-x)/t)
 		vy = abs((py-y)/t)
 		if (y>py):
 			vy = vy*(-1)
 		if (x>px):
 			vx = vx*(-1)
-		rotate = abs(math.degrees(math.cos(abs(px-x)/abs(((x**2-px**2)+(y**2-py**2))**(0.5)))))
-		print(rotate)
+		rotate = math.degrees(math.atan2(px-x, py-y))
 		SpawnBullet(sprite, x, y, vx, vy, Window, array, render, rotate)
 	else:
 		SpawnBullet(sprite, x, y, 0, speed, Window, array, render, 0)
