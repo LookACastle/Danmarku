@@ -1,4 +1,5 @@
 import pygame
+from math import sqrt
 from gfx.loadSprite import Sprites
 
 class bullet(pygame.sprite.Sprite):
@@ -10,16 +11,18 @@ class bullet(pygame.sprite.Sprite):
 		self.array = array
 		self.sprite = sprite
 		self.window = window
+		#self.max_rect = sqrt(128**2*2) - Max size of rect where 128 is sprite width & height
+		self.speed = sqrt(self.vx**2 + self.vy**2)
 		self.bullet = self.array[sprite].copy()
 		pygame.sprite.Sprite.__init__(self)
-		self.rect = pygame.Rect(self.x - (64 + self.vx), self.y - (64 + self.vy), 128 + self.vx*2, 128 + self.vy*2)
+		self.rect = pygame.Rect(self.x - (91 + self.speed*2), self.y - (91 + self.speed*2), 182 + self.speed*2, 182 + self.speed*2)
 		self.mask = pygame.mask.from_surface(self.bullet)
 
 	def move(self, width, height):
 		if (self.y >= -128 and self.y <= height+128 and self.x >= -128 and self.x <= width+128):
 			self.y += self.vy
 			self.x += self.vx
-			self.rect = pygame.Rect(self.x - (64 + self.vx), self.y - (64 + self.vy), 128 + self.vx*2, 128 + self.vy*2)
+			self.rect = pygame.Rect(self.x - (91 + self.speed*2), self.y - (91 + self.speed*2), 182 + self.speed*2, 182 + self.speed*2)
 			return False
 		else:
 			return True
