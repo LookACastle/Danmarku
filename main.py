@@ -31,8 +31,8 @@ def keyboard(event):
 	pressed = pygame.key.get_pressed()
 	if pressed[pygame.K_b]:
 		playerpos = player.getPos()
-		StartBulletFan(980, 0, 20, 160, 0,loaded_Sprites, 14, 3, WINDOW, renderBullets)
-		#StartStraight(980, 540, True, playerpos[0], playerpos[1], loaded_Sprites, 14, 6, WINDOW, renderBullets)
+		#StartBulletFan(980, 0, 20, 160, 50,loaded_Sprites, 14, 3, WINDOW, renderBullets)
+		StartStraight(980, 540, True, playerpos[0], playerpos[1], loaded_Sprites, 14, 6, WINDOW, renderBullets)
 	if pressed[pygame.K_ESCAPE]:
 		pygame.quit()
 		sys.exit()
@@ -44,7 +44,7 @@ start_time = time.time()
 framecount = 0
 WINDOW.fill((66, 194, 244))
 pygame.display.flip()
-StartBulletFan(980, 0, 20, 160, 50,loaded_Sprites, 14, 3, WINDOW, renderBullets)
+StartBulletFan(760, 0, 100, 160, 0,loaded_Sprites, 14, 3, WINDOW, renderBullets)
 while True:
 	clock.tick(MAX_FPS)
 	framecount+=1 
@@ -62,6 +62,7 @@ while True:
 		else:
 			print("no collision :(")'''
 	WINDOW.fill((66, 194, 244))
+	render(render_objects, WINDOW)
 	for i in range((len(renderPlayerBullets)-1), -1, -1):
 		renderPlayerBullets[i].render(WINDOW)
 		remove = renderPlayerBullets[i].move(window_w, window_h)
@@ -72,7 +73,6 @@ while True:
 		remove = renderBullets[i].move(window_w, window_h)
 		if (remove):
 			renderBullets.pop(i)
-	render(render_objects, WINDOW)
 	playerHitbox.render(WINDOW)
 	pygame.display.update(render_objects)
 	pygame.display.update(renderPlayerBullets)
