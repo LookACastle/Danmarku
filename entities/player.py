@@ -7,6 +7,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, array, window, objectsArray):
         self.x = x
         self.y = y
+        self.t = 0
         self.array = array
         self.window = window
         self.objectsArray = objectsArray
@@ -35,8 +36,12 @@ class Player(pygame.sprite.Sprite):
                 self.x += self.speed
                 self.rect = pygame.Rect(self.x - (64 + self.speed), self.y - (64 + self.speed), 128 + self.speed*2, 128 + self.speed*2)
         if pressed[pygame.K_SPACE]:
-            bullet = Player_Projectile(self.x, self.y+PLAYER_PROJECTILE_SPEED, self.array, self.window)
-            self.objectsArray.append(bullet)
+            if (self.t == 15 or self.t == 30 or self.t == 45 or self.t==60):
+                bullet = Player_Projectile(self.x, self.y+PLAYER_PROJECTILE_SPEED, self.array, self.window)
+                self.objectsArray.append(bullet)
+                if (self.t == 60):
+                    self.t = 0
+            self.t += 1
     def render(self, window):
         window.blit(self.player, (self.x - 64, self.y - 64))
 
