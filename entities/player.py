@@ -42,19 +42,6 @@ class Player(pygame.sprite.Sprite):
                 self.cd = 15
                 bullet = Player_Projectile(self.x, self.y+PLAYER_PROJECTILE_SPEED, self.array, self.window)
                 self.objectsArray.append(bullet)
-                
-            '''if (self.t == 1 or self.t == 16 or self.t == 31 or self.t == 46):
-                self.player = self.array[PLAYERSPRITESARRAY][ON_PLANE_SHOOT1].copy()
-            if (self.t == 2 or self.t == 17 or self.t == 32 or self.t == 47):
-                self.player = self.array[PLAYERSPRITESARRAY][ON_PLANE_SHOOT2].copy()
-            if (self.t == 4 or self.t == 19 or self.t == 34 or self.t == 49):
-                self.player = self.array[PLAYERSPRITESARRAY][ON_PLANE_SHOOT3].copy()
-            if (self.t == 6 or self.t == 21 or self.t == 36 or self.t == 51):
-                self.player = self.array[PLAYERSPRITESARRAY][ON_PLANE_SHOOT4].copy()
-            if (self.t == 8 or self.t == 23 or self.t == 38 or self.t == 53):
-                self.player = self.array[PLAYERSPRITESARRAY][ON_PLANE].copy()
-            if (self.t == 60):
-                self.t = 0'''
         if (self.cd > 0):
             self.cd -= 1
         if (self.shooting == True):
