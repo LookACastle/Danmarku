@@ -44,7 +44,10 @@ LASER               = 27
 
 #Player Plane Sprite Numbers
 ON_PLANE            = 0
-ON_PLANE_SHOOT      = 1
+ON_PLANE_SHOOT1     = 1
+ON_PLANE_SHOOT2     = 2
+ON_PLANE_SHOOT3     = 3
+ON_PLANE_SHOOT4     = 4
 PLAYER_HITBOX       = 5
 PLANE               = 6
 PLAYER_PROJECTILE   = 7
