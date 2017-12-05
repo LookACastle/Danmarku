@@ -90,7 +90,7 @@ while True:
 	playerUpdateThread.join()
 	BulletUpdateThread.join()
 	#BulletPlayerCollisionThread.join()
-	keyboard(keydown)
+	keyboard(pygame.event.get(pygame.KEYDOWN))
 	playerHitbox.render(WINDOW)
 	pygame.display.update(render_objects)
 	pygame.display.update(renderPlayerBullets)
