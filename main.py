@@ -39,6 +39,25 @@ def keyboard(event):
 	else:
 		pass
 
+def PlayerUpdate(render_objects, renderPlayerBullets, keydown, window_w, window_h):
+	keyboard(keydown)
+	player.movement(keydown, window_w, window_h)
+	playerHitbox.movement(keydown)
+	render(render_objects, WINDOW)
+	for i in range((len(renderPlayerBullets)-1), -1, -1):
+		renderPlayerBullets[i].render(WINDOW)
+		remove = renderPlayerBullets[i].move(window_w, window_h)
+		if (remove):
+			renderPlayerBullets.pop(i)
+
+def BulletUpdate(renderBullets):
+	for i in range((len(renderBullets)-1),-1,-1):
+		renderBullets[i].render(WINDOW)
+		remove = renderBullets[i].move(window_w, window_h)
+		if (remove):
+			renderBullets.pop(i)
+			
+#def BulletPlayerCollision():
 
 start_time = time.time()
 framecount = 0
@@ -46,6 +65,13 @@ WINDOW.fill((66, 194, 244))
 pygame.display.flip()
 StartBulletFan(760, 0, 100, 160, 0,loaded_Sprites, 14, 3, WINDOW, renderBullets)
 while True:
+	WINDOW.fill((66, 194, 244))
+	BulletUpdateThread = threading.Thread(group=None, target=BulletUpdate, name=None, args=(renderBullets, ))
+	BulletUpdateThread.start()
+	playerUpdateThread = threading.Thread(group=None, target=PlayerUpdate, name=None, args=(render_objects, renderPlayerBullets, pygame.event.get(pygame.KEYDOWN), window_w, window_h, ))
+	playerUpdateThread.start()
+	#BulletPlayerCollisionThread = threading.Thread(group=None, target=BulletUpdate, name=None, args=())
+	#BulletPlayerCollisionThread.start()
 	clock.tick(MAX_FPS)
 	framecount+=1 
 	if (time.time()-start_time >= 1):
@@ -53,26 +79,14 @@ while True:
 		print("FPS:"+ str(math.floor(framecount/(time.time()-start_time))))
 		framecount = 0
 		start_time = time.time()
-	keyboard(pygame.event.get(pygame.KEYDOWN))
-	player.movement(pygame.event.get(pygame.KEYDOWN), window_w, window_h)
-	playerHitbox.movement(pygame.event.get(pygame.KEYDOWN))
 	'''if player is not None and playerHitbox is not None:
 		if pygame.sprite.collide_mask(player, playerHitbox):
 			print("COLLISION")
 		else:
 			print("no collision :(")'''
-	WINDOW.fill((66, 194, 244))
-	render(render_objects, WINDOW)
-	for i in range((len(renderPlayerBullets)-1), -1, -1):
-		renderPlayerBullets[i].render(WINDOW)
-		remove = renderPlayerBullets[i].move(window_w, window_h)
-		if (remove):
-			renderPlayerBullets.pop(i)
-	for i in range((len(renderBullets)-1),-1,-1):
-		renderBullets[i].render(WINDOW)
-		remove = renderBullets[i].move(window_w, window_h)
-		if (remove):
-			renderBullets.pop(i)
+	playerUpdateThread.join()
+	BulletUpdateThread.join()
+	#BulletPlayerCollisionThread.join()
 	playerHitbox.render(WINDOW)
 	pygame.display.update(render_objects)
 	pygame.display.update(renderPlayerBullets)
