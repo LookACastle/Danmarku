@@ -6,8 +6,8 @@ from entities.bullet import *
 import threading
 from constants import *
 
-def StartBulletShower(x, amount, spread, sprite, Window, array, render, speed):
-	bulletshower = threading.Thread(group=None, target=BulletShower, name=None, args=(x, amount, spread, sprite, Window, array, render, speed))
+def StartBulletShower(x, amount, spread, delay, sprite, Window, array, render, speed):
+	bulletshower = threading.Thread(group=None, target=BulletShower, name=None, args=(x, amount, spread, delay, sprite, Window, array, render, speed))
 	bulletshower.start()
 
 def StartBulletFan(x, y, amount, spread, delay, array, sprite, speed, Window, render):

@@ -6,6 +6,7 @@ from entities.player import Player
 from entities.playerHitbox import PlayerHitbox
 from gfx.render import *
 from bullets import *
+from Level import *
 
 pygame.init()
 global player, WINDOW
@@ -59,11 +60,18 @@ def BulletUpdate(renderBullets):
 			
 #def BulletPlayerCollision():
 
+
+def Level(loaded_Sprites, window_w, window_h, Player, WINDOW, renderBullets, level):
+	if (level == 1):
+		level1(loaded_Sprites, window_w, window_h, Player, WINDOW, renderBullets)
+
 start_time = time.time()
 framecount = 0
 WINDOW.fill((66, 194, 244))
 pygame.display.flip()
-StartBulletFan(760, 0, 100, 160, 0,loaded_Sprites, 14, 3, WINDOW, renderBullets)
+
+levelThread = threading.Thread(group=None, target=Level, name=None, args=(loaded_Sprites, window_w, window_h, Player, WINDOW, renderBullets, 1, ))
+levelThread.start()
 while True:
 	WINDOW.fill((66, 194, 244))
 	BulletUpdateThread = threading.Thread(group=None, target=BulletUpdate, name=None, args=(renderBullets, ))
