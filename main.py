@@ -30,10 +30,6 @@ playerHitbox = PlayerHitbox(loaded_Sprites, WINDOW, player)
 #Input handling
 def keyboard(event):
 	pressed = pygame.key.get_pressed()
-	if pressed[pygame.K_b]:
-		playerpos = player.getPos()
-		#StartBulletFan(980, 0, 20, 160, 50,loaded_Sprites, 14, 3, WINDOW, renderBullets)
-		StartStraight(980, 540, True, playerpos[0], playerpos[1], loaded_Sprites, 14, 6, WINDOW, renderBullets)
 	if pressed[pygame.K_ESCAPE]:
 		pygame.quit()
 		sys.exit()
@@ -41,7 +37,6 @@ def keyboard(event):
 		pass
 
 def PlayerUpdate(render_objects, renderPlayerBullets, keydown, window_w, window_h):
-	keyboard(keydown)
 	player.movement(keydown, window_w, window_h)
 	playerHitbox.movement(keydown)
 	render(render_objects, WINDOW)
@@ -81,7 +76,7 @@ while True:
 	#BulletPlayerCollisionThread = threading.Thread(group=None, target=BulletUpdate, name=None, args=())
 	#BulletPlayerCollisionThread.start()
 	clock.tick(MAX_FPS)
-	framecount+=1 
+	framecount+=1
 	if (time.time()-start_time >= 1):
 		print("Enemy Bullets: " + str(len(renderBullets)) + " | Player Bullets: " + str(len(renderPlayerBullets)))
 		print("FPS:"+ str(math.floor(framecount/(time.time()-start_time))))
@@ -95,6 +90,7 @@ while True:
 	playerUpdateThread.join()
 	BulletUpdateThread.join()
 	#BulletPlayerCollisionThread.join()
+	keyboard(keydown)
 	playerHitbox.render(WINDOW)
 	pygame.display.update(render_objects)
 	pygame.display.update(renderPlayerBullets)
