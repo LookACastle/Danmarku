@@ -62,7 +62,7 @@ def BulletPlayerCollision(player, playerHitbox, renderHearts, renderBullets):
 	else:
 		for x in range(len(renderBullets)):
 			if (hitTimer <= 0):
-				if pygame.sprite.collide_mask(playerHitbox, renderBullets[0]):
+				if pygame.sprite.collide_mask(playerHitbox, renderBullets[x]):
 					health = player.getHealth()
 					player.setHealth(health - 1)
 					renderHearts.pop(len(renderHearts) - 1)
@@ -84,26 +84,30 @@ levelThread = threading.Thread(group=None, target=Level, name=None, args=(loaded
 levelThread.start()
 hitTimer = 0
 while True:
-	WINDOW.fill((66, 194, 244))
-	BulletUpdateThread = threading.Thread(group=None, target=BulletUpdate, name=None, args=(renderBullets, ))
-	BulletUpdateThread.start()
-	playerUpdateThread = threading.Thread(group=None, target=PlayerUpdate, name=None, args=(render_objects, renderPlayerBullets, pygame.event.get(pygame.KEYDOWN), window_w, window_h, ))
-	playerUpdateThread.start()
-	BulletPlayerCollisionThread = threading.Thread(group=None, target=BulletPlayerCollision, name=None, args=(player, playerHitbox, renderHearts, renderBullets, ))
-	BulletPlayerCollisionThread.start()
-	clock.tick(MAX_FPS)
-	framecount+=1
-	if (time.time()-start_time >= 1):
-		print("Enemy Bullets: " + str(len(renderBullets)) + " | Player Bullets: " + str(len(renderPlayerBullets)))
-		print("FPS:"+ str(math.floor(framecount/(time.time()-start_time))))
-		framecount = 0
-		start_time = time.time()
-	playerUpdateThread.join()
-	BulletUpdateThread.join()
-	BulletPlayerCollisionThread.join()
-	print (hitTimer)
-	keyboard(pygame.event.get(pygame.KEYDOWN))
-	playerHitbox.render(WINDOW)
-	for x in range(len(renderHearts)):
-		renderHearts[x].render(WINDOW)
-	pygame.display.update()
+	if (player.getHealth() == 0):
+		pygame.quit()
+		sys.exit()
+	else:
+		WINDOW.fill((66, 194, 244))
+		playerUpdateThread = threading.Thread(group=None, target=PlayerUpdate, name=None, args=(render_objects, renderPlayerBullets, pygame.event.get(pygame.KEYDOWN), window_w, window_h, ))
+		playerUpdateThread.start()
+		BulletUpdateThread = threading.Thread(group=None, target=BulletUpdate, name=None, args=(renderBullets, ))
+		BulletUpdateThread.start()
+		BulletPlayerCollisionThread = threading.Thread(group=None, target=BulletPlayerCollision, name=None, args=(player, playerHitbox, renderHearts, renderBullets, ))
+		BulletPlayerCollisionThread.start()
+		clock.tick(MAX_FPS)
+		framecount+=1
+		if (time.time()-start_time >= 1):
+			print("Enemy Bullets: " + str(len(renderBullets)) + " | Player Bullets: " + str(len(renderPlayerBullets)))
+			print("FPS:"+ str(math.floor(framecount/(time.time()-start_time))))
+			framecount = 0
+			start_time = time.time()
+		playerUpdateThread.join()
+		BulletUpdateThread.join()
+		BulletPlayerCollisionThread.join()
+		print (hitTimer)
+		keyboard(pygame.event.get(pygame.KEYDOWN))
+		playerHitbox.render(WINDOW)
+		for x in range(len(renderHearts)):
+			renderHearts[x].render(WINDOW)
+		pygame.display.update()
