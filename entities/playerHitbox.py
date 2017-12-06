@@ -23,7 +23,7 @@ class PlayerHitbox(pygame.sprite.Sprite):
         self.x = self.position[0]
         self.y = self.position[1]
         self.rect = pygame.Rect(self.x - (64 + self.speed), self.y - (64 + self.speed), 128 + self.speed*2, 128 + self.speed*2)
-        if pressed[pygame.K_t]:
+        if pressed[pygame.K_LSHIFT]:
             self.t = True
         else:
             self.t = False

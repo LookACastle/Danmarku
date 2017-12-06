@@ -15,7 +15,7 @@ class bullet(pygame.sprite.Sprite):
 		self.speed = sqrt(self.vx**2 + self.vy**2)
 		self.bullet = self.array[sprite].copy()
 		pygame.sprite.Sprite.__init__(self)
-		self.rect = self.bullet.get_rect(center=(self.x, self.y),width=(190+self.speed*2),height=(190+self.speed*2))
+		self.rect = self.bullet.get_rect(center=(self.x, self.y),width=(190	+self.speed*2),height=(190+self.speed*2))
 		#self.rect = pygame.Rect(self.x - (91 + self.speed*2), self.y - (91 + self.speed*2), 182 + self.speed*2, 182 + self.speed*2)
 		self.mask = pygame.mask.from_surface(self.bullet)
 
