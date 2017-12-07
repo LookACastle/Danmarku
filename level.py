@@ -1,10 +1,13 @@
 import pygame, math, time
 from bullets import *
 from constants import *
+from random import randint
+from random import uniform
 
 SBF = StartBulletFan #x, y, amount, spread, delay, array, sprite, speed, Window, render
 SBS = StartBulletShower #x, amount, spread, delay, sprite, Window, array, render, speed
 SS = StartStraight #x, y, Tracer, px, py, array, sprite, speed, Window, render
+SB = StartBeam #x, Tracer, px, WindowHeight, array, Window, renderbeam, renderprebeam
 
 def level1(Sprites ,WindowWidth, WindowHeight, player, Window, render):
 	time.sleep(5)
@@ -139,3 +142,17 @@ def level2(Sprites ,WindowWidth, WindowHeight, player, Window, render):
 	SBF(WindowWidth/11*8 , -128, 10, 180, 150, Sprites, 14, 6, Window, render)
 	SBF(WindowWidth/11*9 , -128, 10, 180, 150, Sprites, 14, 6, Window, render)
 	SBF(WindowWidth/11*10, -128, 10, 180, 150, Sprites, 14, 6, Window, render)
+
+def level3(Sprites ,WindowWidth, WindowHeight, player, Window, render, renderbeam, renderprebeam):
+	while True:
+		playerpos = player.getPos()
+		spawn = randint(1, 100)
+		if (spawn < 101 and spawn > 90):
+			SBF(randint(128, WindowWidth-128), -128, randint(1,15), randint(45,180), randint(0,1000), Sprites, 14, randint(4,6), Window, render)
+		if (spawn == 90):
+			SB(randint(128, WindowWidth-128), randint(0,1), playerpos[0], WindowHeight, Sprites, Window, renderbeam, renderprebeam)
+		if (spawn < 90 and spawn > 75):
+			SS(randint(128, WindowWidth-128), -128, True, playerpos[0], playerpos[1], Sprites, 17, randint(6,8), Window, render)
+		if (spawn < 76):
+			SS(randint(128, WindowWidth-128), -128, False, playerpos[0], playerpos[1], Sprites, 11, randint(6,8), Window, render)
+		time.sleep(uniform(0,0.2))

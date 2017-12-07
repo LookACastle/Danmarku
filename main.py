@@ -27,7 +27,7 @@ load_Sprites(loaded_Sprites)
 clock = pygame.time.Clock()
 window_w, window_h = pygame.display.get_surface().get_size()
 
-LevelValue = 2
+LevelValue = 3
 player = Player(3, int(window_w/2), int(window_h/2), loaded_Sprites, WINDOW, renderPlayerBullets)
 render_objects.append(player)
 playerHitbox = PlayerHitbox(loaded_Sprites, WINDOW, player)
@@ -38,10 +38,6 @@ def keyboard(event):
 	if pressed[pygame.K_ESCAPE]:
 		pygame.quit()
 		sys.exit()
-	elif pressed[pygame.K_b]:
-		playerpos = player.getPos()
-		StartBeam(200, True, playerpos[0], window_h, loaded_Sprites, WINDOW, renderBeam, renderPreBeam)
-
 	else:
 		pass
 
@@ -94,6 +90,8 @@ def Level(loaded_Sprites, window_w, window_h, player, WINDOW, renderBullets, lev
 		level1(loaded_Sprites, window_w, window_h, player, WINDOW, renderBullets)
 	if (level == 2):
 		level2(loaded_Sprites, window_w, window_h, player, WINDOW, renderBullets)
+	if (level == 3):
+		level3(loaded_Sprites, window_w, window_h, player, WINDOW, renderBullets, renderBeam, renderPreBeam)
 
 for x in range(1, int(player.getHealth() + 1)):
 	health = Health(int(player.getHealth()), x * 32, 32, loaded_Sprites, WINDOW)
@@ -103,8 +101,8 @@ framecount = 0
 WINDOW.fill((66, 194, 244))
 pygame.display.flip()
 
-#levelThread = threading.Thread(group=None, target=Level, name=None, args=(loaded_Sprites, window_w, window_h, player, WINDOW, renderBullets, LevelValue, ))
-#levelThread.start()
+levelThread = threading.Thread(group=None, target=Level, name=None, args=(loaded_Sprites, window_w, window_h, player, WINDOW, renderBullets, LevelValue, ))
+levelThread.start()
 hitTimer = 0
 while True:
 	if (player.getHealth() == 0):
