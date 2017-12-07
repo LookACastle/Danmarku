@@ -45,6 +45,10 @@ class Player(pygame.sprite.Sprite):
                     self.cd = 15
                     bullet = Player_Projectile(self.x, self.y+PLAYER_PROJECTILE_SPEED, self.array, self.window)
                     self.objectsArray.append(bullet)
+            if pressed[pygame.K_LSHIFT]:
+                self.speed = PLAYER_SPEED/4
+            else:
+                self.speed = PLAYER_SPEED
             if (self.cd > 0):
                 self.cd -= 1
             if (self.shooting == True):

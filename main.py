@@ -7,7 +7,7 @@ from entities.player import Player
 from entities.playerHitbox import PlayerHitbox
 from gfx.render import *
 from bullets import *
-from Level import *
+from level import *
 
 pygame.init()
 global player, WINDOW
@@ -25,6 +25,7 @@ load_Sprites(loaded_Sprites)
 clock = pygame.time.Clock()
 window_w, window_h = pygame.display.get_surface().get_size()
 
+LevelValue = 2
 player = Player(3, int(window_w/2), int(window_h/2), loaded_Sprites, WINDOW, renderPlayerBullets)
 render_objects.append(player)
 playerHitbox = PlayerHitbox(loaded_Sprites, WINDOW, player)
@@ -68,9 +69,11 @@ def BulletPlayerCollision(player, playerHitbox, renderHearts, renderBullets):
 					renderHearts.pop(len(renderHearts) - 1)
 					hitTimer = 60
 
-def Level(loaded_Sprites, window_w, window_h, Player, WINDOW, renderBullets, level):
+def Level(loaded_Sprites, window_w, window_h, player, WINDOW, renderBullets, level):
 	if (level == 1):
-		level1(loaded_Sprites, window_w, window_h, Player, WINDOW, renderBullets)
+		level1(loaded_Sprites, window_w, window_h, player, WINDOW, renderBullets)
+	if (level == 2):
+		level2(loaded_Sprites, window_w, window_h, player, WINDOW, renderBullets)
 
 for x in range(1, int(player.getHealth() + 1)):
 	health = Health(int(player.getHealth()), x * 32, 32, loaded_Sprites, WINDOW)
@@ -80,7 +83,7 @@ framecount = 0
 WINDOW.fill((66, 194, 244))
 pygame.display.flip()
 
-levelThread = threading.Thread(group=None, target=Level, name=None, args=(loaded_Sprites, window_w, window_h, Player, WINDOW, renderBullets, 1, ))
+levelThread = threading.Thread(group=None, target=Level, name=None, args=(loaded_Sprites, window_w, window_h, player, WINDOW, renderBullets, LevelValue, ))
 levelThread.start()
 hitTimer = 0
 while True:
@@ -105,7 +108,6 @@ while True:
 		playerUpdateThread.join()
 		BulletUpdateThread.join()
 		BulletPlayerCollisionThread.join()
-		print (hitTimer)
 		keyboard(pygame.event.get(pygame.KEYDOWN))
 		playerHitbox.render(WINDOW)
 		for x in range(len(renderHearts)):
