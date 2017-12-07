@@ -19,6 +19,8 @@ else:
 loaded_Sprites = [[], [], []]
 render_objects = []
 renderBullets = []
+renderBeam = []
+renderPreBeam = []
 renderPlayerBullets = []
 renderHearts = []
 load_Sprites(loaded_Sprites)
@@ -36,6 +38,10 @@ def keyboard(event):
 	if pressed[pygame.K_ESCAPE]:
 		pygame.quit()
 		sys.exit()
+	elif pressed[pygame.K_b]:
+		playerpos = player.getPos()
+		StartBeam(200, True, playerpos[0], window_h, loaded_Sprites, WINDOW, renderBeam, renderPreBeam)
+
 	else:
 		pass
 
@@ -55,20 +61,34 @@ def BulletUpdate(renderBullets):
 		remove = renderBullets[i].move(window_w, window_h)
 		if (remove):
 			renderBullets.pop(i)
+	if (len(renderBeam) is not 0):
+		for i in range(len(renderBeam)):
+			renderBeam[i].render(WINDOW)
+	if (len(renderPreBeam) is not 0):
+		for i in range(len(renderPreBeam)):
+			renderPreBeam[i].render(WINDOW)
 
 def BulletPlayerCollision(player, playerHitbox, renderHearts, renderBullets):
 	global hitTimer
 	if (hitTimer > 0):
 		hitTimer -= 1
 	else:
-		for x in range(len(renderBullets)):
-			if (hitTimer <= 0):
-				if pygame.sprite.collide_mask(playerHitbox, renderBullets[x]):
-					health = player.getHealth()
-					player.setHealth(health - 1)
-					renderHearts.pop(len(renderHearts) - 1)
-					hitTimer = 60
-
+		if (len(renderBullets) is not 0):
+			for x in range(len(renderBullets)):
+				if (hitTimer <= 0):
+					if pygame.sprite.collide_mask(playerHitbox, renderBullets[x]):
+						health = player.getHealth()
+						player.setHealth(health - 1)
+						renderHearts.pop(len(renderHearts) - 1)
+						hitTimer = 60
+		if (len(renderBeam) is not 0):
+			for x in range(len(renderBeam)):
+				if (hitTimer <= 0):
+					if pygame.sprite.collide_mask(playerHitbox, renderBeam[x]):
+						health = player.getHealth()
+						player.setHealth(health - 1)
+						renderHearts.pop(len(renderHearts) - 1)
+						hitTimer = 60
 def Level(loaded_Sprites, window_w, window_h, player, WINDOW, renderBullets, level):
 	if (level == 1):
 		level1(loaded_Sprites, window_w, window_h, player, WINDOW, renderBullets)
@@ -83,8 +103,8 @@ framecount = 0
 WINDOW.fill((66, 194, 244))
 pygame.display.flip()
 
-levelThread = threading.Thread(group=None, target=Level, name=None, args=(loaded_Sprites, window_w, window_h, player, WINDOW, renderBullets, LevelValue, ))
-levelThread.start()
+#levelThread = threading.Thread(group=None, target=Level, name=None, args=(loaded_Sprites, window_w, window_h, player, WINDOW, renderBullets, LevelValue, ))
+#levelThread.start()
 hitTimer = 0
 while True:
 	if (player.getHealth() == 0):

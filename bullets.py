@@ -18,6 +18,10 @@ def StartStraight(x, y, Tracer, px, py, array, sprite, speed, Window, render):
 	bulletfan = threading.Thread(group=None, target=Straight, name=None, args=(x, y, Tracer, px, py, sprite, array, speed, Window, render))
 	bulletfan.start()
 
+def StartBeam(x, Tracer, px, windowHeight, array, Window, render, preBeamRender):
+	bulletfan = threading.Thread(group=None, target=Beam, name=None, args=(x, Tracer, windowHeight, px, array, Window, render, preBeamRender))
+	bulletfan.start()
+
 def BulletShower(x, amount, spread, delay, sprite, Window, array, render, speed):
 	for n in range(amount):
 		SpawnBullet(sprite,x+n*spread,-128,0,speed,Window, array, render, 0)
@@ -46,9 +50,34 @@ def Straight(x, y, Tracer, px, py, sprite, array, speed, Window, render):
 	else:
 		SpawnBullet(sprite, x, y, 0, speed, Window, array, render, 0)
 
+def Beam(x, Tracer, windowHeight, px, array, Window, render, preBeamRender):
+	amount = math.ceil(windowHeight/128) + 1
+	if Tracer:
+		x = px
+	for i in range(amount):
+		preBeam(x, 128*i, Window, array, preBeamRender)
+	sleep(2)
+	removePreBeam(amount, preBeamRender)
+	for i in range(amount):
+		SpawnBullet(27, x, 128*i, 0, 0, Window, array, render, 0)
+	sleep(4)
+	removeBeam(amount, render)
+
+def removeBeam(amount, render):
+	for x in range(amount-1, -1, -1):
+		render.pop(x)
+
+def preBeam(x, y, Window, array, preBeamRender):
+	obj = bullet(31, x, y, 0, 0, array[ENEMYSPRITESARRAY], Window)
+	preBeamRender.append(obj)
+	obj.render(Window)
+
+def removePreBeam(amount, PreBeamRender):
+	for x in range(amount-1, -1, -1):
+		PreBeamRender.pop(x)
+
 def Function(funcx, funcy, x, y, sprite):
 	bullet(sprite, x, y, vx, vy, 0)
-
 
 def SpawnBullet(sprite, x, y, vx, vy, Window, array, render, rotate):
 	obj = bullet(sprite, x, y, vx, vy, array[ENEMYSPRITESARRAY], Window)

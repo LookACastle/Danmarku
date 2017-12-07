@@ -11,6 +11,7 @@ class bullet(pygame.sprite.Sprite):
 		self.array = array
 		self.sprite = sprite
 		self.window = window
+		self.t = 0
 		#self.max_rect = sqrt(128**2*2) - Max size of rect where 128 is sprite width & height
 		self.speed = sqrt(self.vx**2 + self.vy**2)
 		self.bullet = self.array[sprite].copy()
@@ -31,6 +32,17 @@ class bullet(pygame.sprite.Sprite):
 			return True
 
 	def render(self, window):
+		if (self.sprite == 27):
+			self.t += 1
+			if (self.t == 0):
+				self.bullet = self.array[27].copy()
+			elif (self.t == 3):
+				self.bullet = self.array[28].copy()
+			elif (self.t == 6):
+				self.bullet = self.array[29].copy()
+			elif (self.t == 9):
+				self.bullet = self.array[30].copy()
+				self.t = -2
 		window.blit(self.bullet, self.rect)
 
 	def rotate(self, angle):
